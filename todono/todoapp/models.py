@@ -10,6 +10,13 @@ class Projects(models.Model):
     url = models.URLField(max_length=250)
     users = models.ManyToManyField(CustomUsers)
 
+    def __str__(self):
+        return str(self.project_name)
+
+    class Meta:
+        verbose_name = "Project"
+        verbose_name_plural = "Projects"
+
 
 class ToDoNotes(models.Model):
     id = models.UUIDField(default=uuid4, primary_key=True)
@@ -21,3 +28,10 @@ class ToDoNotes(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     dead_line = models.DateTimeField()
+
+    def __str__(self):
+        return str(self.title)
+
+    class Meta:
+        verbose_name = "Note"
+        verbose_name_plural = "Notes"
