@@ -127,3 +127,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+todono/todoapp/migrations/0001_initial.py
+todono/app/migrations/0001_initial.py
