@@ -11,5 +11,5 @@ class CustomUserModelSerializer(HyperlinkedModelSerializer):
 class ShortCustomUserModelSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = CustomUsers
-        fields = ['first_name', 'last_name']
+        fields = ['id', 'first_name', 'last_name']
 

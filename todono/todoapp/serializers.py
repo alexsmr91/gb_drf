@@ -14,7 +14,7 @@ class ProjectsModelSerializer(HyperlinkedModelSerializer):
 class ShortProjectsModelSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Projects
-        fields = ['project_name']
+        fields = ['id', 'project_name']
 
 
 class ToDoNotesModelSerializer(HyperlinkedModelSerializer):
