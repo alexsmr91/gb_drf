@@ -1,14 +1,16 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 
 const UserItem = ({ user }) => {
     return (
         <tr>
+
             <td>
-                {user.email}
+                <Link to={`user/${user.id}`}>{user.userName} </Link>
             </td>
             <td>
-                {user.userName}
+                {user.email}
             </td>
             <td>
                 {user.firstName}
@@ -26,24 +28,28 @@ const UserItem = ({ user }) => {
 const UserList = ({ users }) => {
     return (
         <table>
-            <th>
-                E-mail
-            </th>
-            <th>
-                Username
-            </th>
-            <th>
-                Имя
-            </th>
-            <th>
-                Фамилия
-            </th>
-            <th>
-                ДР
-            </th>
-            {users.map((user) => <UserItem user={user} />)}
+            <thead>
+                <th>
+                    Username
+                </th>
+                <th>
+                    E-mail
+                </th>
+                <th>
+                    Имя
+                </th>
+                <th>
+                    Фамилия
+                </th>
+                <th>
+                    ДР
+                </th>
+            </thead>
+            {users.map((elem) => <UserItem user={elem} />)}
+
         </table>
+
     )
 }
 
-export default UserList
+export default UserList 
