@@ -41,8 +41,10 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'rest_framework.authtoken',
+    'drf_yasg',
     'app',
     'todoapp',
+
 ]
 
 MIDDLEWARE = [
@@ -137,7 +139,13 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
 ]
 
+
+AUTH_USER_MODEL = 'app.CustomUsers'
+
+
 REST_FRAMEWORK = {
+
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
 
     'DEFAULT_RENDERER_CLASSES': (
         'djangorestframework_camel_case.render.CamelCaseJSONRenderer',

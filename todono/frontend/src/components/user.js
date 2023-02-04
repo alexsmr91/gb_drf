@@ -13,7 +13,7 @@ const User = ({ users }) => {
             <h2>Фамилия</h2>
             {user.lastName}
             <h2>Никнэйм</h2>
-            {user.userName}
+            {user.username}
             <h2>Почта</h2>
             {user.email}
             <h2>ДР</h2>
