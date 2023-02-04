@@ -4,9 +4,10 @@ from .serializers import CustomUserModelSerializer
 from rest_framework import mixins
 
 
-class LRUCustomUsersModelViewSet(mixins.ListModelMixin,
-                                 mixins.RetrieveModelMixin,
-                                 mixins.UpdateModelMixin,
-                                 GenericViewSet):
+class CustomUsersModelViewSet(mixins.CreateModelMixin,
+                              mixins.ListModelMixin,
+                              mixins.RetrieveModelMixin,
+                              mixins.UpdateModelMixin,
+                              GenericViewSet):
     queryset = CustomUsers.objects.get_queryset().order_by('id')
     serializer_class = CustomUserModelSerializer
