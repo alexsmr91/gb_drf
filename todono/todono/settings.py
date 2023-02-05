@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'rest_framework.authtoken',
+    'graphene_django',
     'drf_yasg',
     'app',
     'todoapp',
@@ -181,3 +182,9 @@ REST_FRAMEWORK = {
 
 
 }
+
+
+GRAPHENE = {
+    'SCHEMA': 'todono.schema.schema',
+}
+
