@@ -1,25 +1,25 @@
-from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework.serializers import ModelSerializer
 from .models import Projects, ToDoNotes
 from app.serializers import ShortCustomUserModelSerializer
 
 
-class ProjectsModelSerializer(HyperlinkedModelSerializer):
-    users = ShortCustomUserModelSerializer(many=True)
+class ProjectsModelSerializer(ModelSerializer):
+    #users = ShortCustomUserModelSerializer(many=True)
 
     class Meta:
         model = Projects
         fields = ['id', 'project_name', 'description', 'url', 'users']
 
 
-class ShortProjectsModelSerializer(HyperlinkedModelSerializer):
+class ShortProjectsModelSerializer(ModelSerializer):
     class Meta:
         model = Projects
         fields = ['id', 'project_name']
 
 
-class ToDoNotesModelSerializer(HyperlinkedModelSerializer):
-    owner = ShortCustomUserModelSerializer()
-    project = ShortProjectsModelSerializer()
+class ToDoNotesModelSerializer(ModelSerializer):
+    #owner = ShortCustomUserModelSerializer()
+    #project = ShortProjectsModelSerializer()
 
     class Meta:
         model = ToDoNotes

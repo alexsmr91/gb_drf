@@ -3,43 +3,42 @@ import UserShort from './userName.js'
 import { Link } from 'react-router-dom'
 
 
-const active = {
-    true: 'ДА',
-    false: 'НЕТ'
+const NoteItem = ({ note, users, projects, deleteNote }) => {
+    const user = users.filter((item) => item?.id == note?.owner)[0]
+    const project = projects.filter((item) => item?.id == note?.project)[0]
+    if (note?.active) {
+        return (
+            <tr>
+                <td>
+                    <Link to={`/note/${note?.id}`}>{note?.title}</Link>
+                </td>
+                <td>
+                    {note?.text}
+                </td>
+                <td>
+                    <Link to={`/project/${project?.id}`}>{project?.projectName}</Link>
+                </td>
+                <td>
+                    <UserShort user={user} />
+                </td>
+                <td>
+                    {note?.created}
+                </td>
+                <td>
+                    {note?.updated}
+                </td>
+                <td>
+                    {note?.deadLine}
+                </td>
+                <td>
+                    <button onClick={() => deleteNote(note?.id)} type='button'>Delete</button>
+                </td>
+            </tr>
+        )
+    }
 }
 
-const NoteItem = ({ note }) => {
-    return (
-        <tr>
-            <td>
-                <Link to={`/note/${note.id}`}>{note.title}</Link>
-            </td>
-            <td>
-                {note.text}
-            </td>
-            <td>
-                {active[note.active]}
-            </td>
-            <td>
-                <Link to={`/project/${note.project.id}`}>{note.project.projectName}</Link>
-            </td>
-            <td>
-                <UserShort user={note.owner} />
-            </td>
-            <td>
-                {note.created}
-            </td>
-            <td>
-                {note.updated}
-            </td>
-            <td>
-                {note.deadLine}
-            </td>
-        </tr>
-    )
-}
-
-const NotesList = ({ notes }) => {
+const NotesList = ({ users, projects, notes, deleteNote }) => {
     return (
         <table>
             <thead>
@@ -48,9 +47,6 @@ const NotesList = ({ notes }) => {
                 </th>
                 <th>
                     Текст задания
-                </th>
-                <th>
-                    В работе
                 </th>
                 <th>
                     Проект
@@ -67,8 +63,12 @@ const NotesList = ({ notes }) => {
                 <th>
                     Дедлайн
                 </th>
+                <th>
+                    Действия
+                </th>
             </thead>
-            {notes.map((elem) => <NoteItem note={elem} />)}
+            {notes.map((elem) => <NoteItem note={elem} users={users} projects={projects} deleteNote={deleteNote} />)}
+            <Link to='/notes/create'>Create</Link>
         </table>
     )
 }
