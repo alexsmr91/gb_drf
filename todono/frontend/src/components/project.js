@@ -3,19 +3,17 @@ import { useParams } from 'react-router-dom'
 import UserShort from './userName.js'
 
 
-const Project = ({ projects }) => {
+const Project = ({ projects, users }) => {
     let { id } = useParams()
-    let prj = projects.filter((item) => item.id == id)
-    prj = prj[0]
-
+    let project = projects.filter((item) => item?.id == id)[0]
     return (
         <div>
             <h2>Название</h2>
-            {prj.projectName}
+            {project?.projectName}
             <h2>Описание</h2>
-            {prj.description}
+            {project?.description}
             <h2>Пользователи</h2>
-            {prj.users.map((elem) => <UserShort user={elem} />)}
+            {project?.users.map((elem) => <UserShort user={users.filter((item) => item?.id == elem)[0]} />)}
         </div>
 
     )
