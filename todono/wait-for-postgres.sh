@@ -2,10 +2,10 @@
 
 set -e
 
-cmd="$@"
-
 # service/container name in the docker-compose file
 host="$1"
+shift
+cmd="$@"
 
 until PGPASSWORD="dante123456" psql -h "$host" -d "drf" -U "dante" -c '\q'; do
    >&2 echo "Postgres is unavailable - sleeping"
