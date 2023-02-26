@@ -6,14 +6,21 @@ services:
     ports:
       - 5432:5432
     environment:
-      SQL_USER: dante
-      SQL_PASSWORD: dante123456
-      SQL_DB: drf
+      POSTGRES_USER: dante
+      POSTGRES_PASSWORD: dante123456
+      POSTGRES_DB: drf
   backend:
     build:
       context: .
     expose:
       - 8080
+    environment:
+      SQL_ENGINE: django.db.backends.postgresql
+      SQL_HOST: db
+      SQL_PORT: 5432
+      SQL_USER: dante
+      SQL_PASSWORD: dante123456
+      SQL_DB: drf
     command: bash -c "
       ./wait-for-postgres.sh db
       && python manage.py makemigrations
