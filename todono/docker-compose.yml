@@ -1,0 +1,48 @@
+version: '3.1'
+services:
+  db:
+    image: postgres:13.1
+    privileged: true
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: dante
+      POSTGRES_PASSWORD: dante123456
+      POSTGRES_DB: drf
+  backend:
+    build:
+      context: .
+    expose:
+      - 8080
+    environment:
+      SQL_ENGINE: django.db.backends.postgresql
+      SQL_HOST: db
+      SQL_PORT: 5432
+      SQL_USER: dante
+      SQL_PASSWORD: dante123456
+      SQL_DATABASE: drf
+      DJANGO_SUPERUSER_PASSWORD: qwe123
+      DJANGO_SUPERUSER_EMAIL: a@dm.in
+      DJANGO_SUPERUSER_USERNAME: admin
+    command: bash -c "
+      ./wait-for-postgres.sh db
+      && python manage.py makemigrations
+      && python manage.py migrate
+      && python manage.py createsuperuser --noinput --username admin --email a@dm.in
+      && gunicorn todono.wsgi -b 0.0.0.0:8080
+      "
+    depends_on:
+      - db
+  nginx:
+    build: ./nginx
+    ports:
+      - 8000:80
+    depends_on:
+      - backend
+
+  frontend:
+    build: ./frontend
+    ports:
+      - 80:80
+    depends_on:
+      - nginx
