@@ -22,14 +22,16 @@ services:
       SQL_PASSWORD: dante123456
       SQL_DATABASE: drf
       DJANGO_SUPERUSER_PASSWORD: qwe123
+      DJANGO_SUPERUSER_EMAIL: a@dm.in
+      DJANGO_SUPERUSER_USERNAME: admin
     command: bash -c "
       ./wait-for-postgres.sh db
       && python manage.py makemigrations
       && python manage.py migrate
       && python manage.py createsuperuser \
-        --noinput \
-        --username admin \
-        --email a@dm.in
+      --noinput \
+      --username admin \
+      --email a@dm.in
       && gunicorn todono.wsgi -b 0.0.0.0:8080
       "
     depends_on:
