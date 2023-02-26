@@ -20,7 +20,7 @@ services:
       SQL_PORT: 5432
       SQL_USER: dante
       SQL_PASSWORD: dante123456
-      SQL_DB: drf
+      SQL_DATABASE: drf
     command: bash -c "
       ./wait-for-postgres.sh db
       && python manage.py makemigrations
