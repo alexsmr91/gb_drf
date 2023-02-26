@@ -28,10 +28,7 @@ services:
       ./wait-for-postgres.sh db
       && python manage.py makemigrations
       && python manage.py migrate
-      && python manage.py createsuperuser \
-      --noinput \
-      --username admin \
-      --email a@dm.in
+      && python manage.py createsuperuser --noinput --username admin --email a@dm.in
       && gunicorn todono.wsgi -b 0.0.0.0:8080
       "
     depends_on:
